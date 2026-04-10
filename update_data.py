@@ -103,7 +103,7 @@ det_cluster AS (
   SELECT 'cupon_det' as vista, cluster, mes, cupon_detail as dimension, cupon_parent as parent,
     COUNT(*) as ventas, ROUND(SUM(revenue), 1) as revenue
   FROM base WHERE cupon_detail IS NOT NULL
-  GROUP BY cluster, mes, cupon_detail, cupon_parent
+  GROUB BY cluster, mes, cupon_detail, cupon_parent
 ),
 det_all AS (
   SELECT 'cupon_det' as vista, 'all' as cluster, mes, cupon_detail as dimension, cupon_parent as parent,
@@ -117,7 +117,6 @@ cruce_cluster AS (
     cupon_parent as parent,
     COUNT(*) as ventas, ROUND(SUM(revenue), 0) as revenue
   FROM base GROUP BY cluster, mes, cupon_parent, utm_subchannel
-  HAVING SUM(revenue) > 0
 ),
 cruce_all AS (
   SELECT 'cruce' as vista, 'all' as cluster, mes,
@@ -125,7 +124,6 @@ cruce_all AS (
     cupon_parent as parent,
     COUNT(*) as ventas, ROUND(SUM(revenue), 0) as revenue
   FROM base GROUP BY mes, cupon_parent, utm_subchannel
-  HAVING SUM(revenue) > 0
 )
 SELECT * FROM utm_cluster UNION ALL SELECT * FROM utm_all
 UNION ALL SELECT * FROM cupon_cluster UNION ALL SELECT * FROM cupon_all
