@@ -103,7 +103,7 @@ det_cluster AS (
   SELECT 'cupon_det' as vista, cluster, mes, cupon_detail as dimension, cupon_parent as parent,
     COUNT(*) as ventas, ROUND(SUM(revenue), 1) as revenue
   FROM base WHERE cupon_detail IS NOT NULL
-  GROUB BY cluster, mes, cupon_detail, cupon_parent
+  GROUP BY cluster, mes, cupon_detail, cupon_parent
 ),
 det_all AS (
   SELECT 'cupon_det' as vista, 'all' as cluster, mes, cupon_detail as dimension, cupon_parent as parent,
