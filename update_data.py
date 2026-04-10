@@ -74,7 +74,7 @@ WITH base AS (
     END AS utm_parent
   FROM `coderhouse-data.Finance.Purchases`
   WHERE payment_status IN ('SUCCEEDED', 'SUCCESS')
-    AND created_at >= FORMAT_DATE('%Y-01-01', CURRENT_DATE())
+    AND created_at >= DATETIME(DATE_TRUNC(CURRENT_DATE(), YEAR))
     AND email NOT LIKE '%@coderhouse.com'
     AND email NOT LIKE '%+test%'
     AND product NOT LIKE '%(Demo)%'
